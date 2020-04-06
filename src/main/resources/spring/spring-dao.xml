@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                    http://www.springframework.org/schema/mvc
+                    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+<!--    &lt;!&ndash; 自动扫描 &ndash;&gt;-->
+<!--    <context:component-scan base-package="com.anteater.fengfang.mapper" />-->
+
+    <!-- 1. 引入配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties" />
+    </bean>
+    <!-- 2. 配置数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="driverClassName" value="${driver8}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <!-- c3p0连接池的私有属性 -->
+        <property name="maxActive" value="30" />
+        <property name="initialSize" value="10" />
+        <!-- 关闭连接后不自动commit -->
+        <property name="defaultAutoCommit" value="false" />
+        <!-- 获取连接超时时间 -->
+        <property name="maxWait" value="100000" />
+        <!-- 是否缓存preparedStatement -->
+        <property name="poolPreparedStatements" value="true" />
+        <!-- 当获取连接失败重试次数 -->
+        <property name="connectionErrorRetryAttempts" value="2" />
+    </bean>
+
+    <!-- 3. spring和MyBatis完美整合，不需要mybatis的配置映射文件 可以替换hibernate其他框架 -->
+    <!-- -配置自动扫描扫描所有的mapper.xml文件不再手动引入 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+<!--        &lt;!&ndash; 扫描sql配置文件:mapper需要的xml文件 使用接口配置可以忽略 &ndash;&gt;-->
+<!--        <property name="mapperLocations" value="classpath:com/anteater/fengfang/mapper" />-->
+    </bean>
+
+    <!-- 4. mapper/dao 接口所在包名，Spring会自动查找其下的类加入到容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 给出需要扫描Dao接口包 -->
+        <property name="basePackage" value="com.anteater.fengfang.mapper" />
+        <!-- 注入sqlSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+
+    </bean>
+</beans>

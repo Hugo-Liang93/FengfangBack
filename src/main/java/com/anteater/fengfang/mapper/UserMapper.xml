@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anteater.fengfang.mapper.UserMapper">
+    <resultMap id="userMap" type="com.anteater.fengfang.domains.User">
+        <id property="user_id" column="user_id"></id>
+        <result property="user_name" column="user_name"></result>
+        <result property="user_company" column="user_company"></result>
+        <result property="user_dept" column="user_dept"></result>
+        <result property="user_office" column="user_office"></result>
+        <result property="user_hiredate" column="user_hiredate"></result>
+        <result property="user_position" column="user_position"></result>
+        <result property="user_pic" column="user_pic"></result>
+        <result property="user_email" column="user_email"></result>
+        <!--   可进行分布查询 支持懒加载     -->
+        <association property="permisssion" javaType="com.anteater.fengfang.domains.Permisssion">
+            <id property="role_id" column="role_id"></id>
+            <result property="role_name" column="role_name"></result>
+            <result property="role_name_en" column="role_name"></result>
+            <result property="active_post" column="active_post"></result>
+            <result property="active_del" column="active_del"></result>
+            <result property="active_check" column="active_check"></result>
+            <result property="active_modify" column="active_modify"></result>
+            <result property="active_search" column="active_search"></result>
+            <result property="user_add" column="user_add"></result>
+            <result property="user_del" column="user_del"></result>
+            <result property="user_search" column="user_search"></result>
+            <result property="clockin_export" column="clockin_export"></result>
+            <result property="clockin_del" column="clockin_del"></result>
+            <result property="clockin_search" column="clockin_search"></result>
+            <result property="clockin_modify" column="clockin_modify"></result>
+            <result property="schedule_add" column="schedule_add"></result>
+            <result property="schedule_del" column="schedule_del"></result>
+            <result property="schedule_search" column="schedule_search"></result>
+        </association>
+    </resultMap>
+    <select id="getAllUsers" resultMap="userMap">
+        select * from userinfo as a left join user_permissions as b on a.role_id = b.role_id
+    </select>
+
+    <select id="getUserById" resultType="com.anteater.fengfang.domains.User">
+        select * from userinfo where user_id = #{user_id}
+    </select>
+</mapper>

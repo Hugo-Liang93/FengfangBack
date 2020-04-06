@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 保证唯一 我这里填写的是映射类的名字 xml文件名和映射类的名字是一样的-->
+<mapper namespace="com.anteater.fengfang.mapper.AuthMapper">
+
+
+    <select id="getUserbyLoginInfo" resultType="com.anteater.fengfang.domains.User">
+        select * from userinfo where (user_id = #{login_id} or user_email = #{login_id}) and user_password =#{login_password}
+    </select>
+</mapper>
