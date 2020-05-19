@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 保证唯一 我这里填写的是映射类的名字 xml文件名和映射类的名字是一样的-->
+<mapper namespace="com.anteater.fengfang.mapper.ClockInMapper">
+    <resultMap id="clockInMap" type="com.anteater.fengfang.domains.Clockin">
+        <id property="id" column="id"></id>
+        <result property="user_id" column="user_id"></result>
+        <result property="clockin_time" column="clockin_time"></result>
+        <result property="clockin_path" column="clockin_path"></result>
+        <result property="clockin_lng" column="clockin_lng"></result>
+        <result property="clockin_lat" column="clockin_lat"></result>
+    </resultMap>
+
+    <insert id="insertClockIn" useGeneratedKeys="true" keyProperty="id" parameterType="com.anteater.fengfang.domains.Clockin">
+        insert into user_clockin (user_id,clockin_path,clockin_time,clockin_lng,clockin_lat) values (#{user_id},#{clockin_path},now(),#{clockin_lng},#{clockin_lng})
+    </insert>
+
+    <select id="getTodayClockIn" resultMap="clockInMap" useCache="false">
+        select * from user_clockin where user_id = #{user_id} and to_days(clockin_time) = to_days(now())
+    </select>
+
+    <select id="getThisMonthClockInListByUid" resultType="com.anteater.fengfang.domains.Clockin">
+        select * from user_clockin where  DATE_FORMAT(clockin_time, '%Y%m' ) = DATE_FORMAT( NOW() , '%Y%m' )
+        and user_id = #{user_id}
+    </select>
+
+
+</mapper>

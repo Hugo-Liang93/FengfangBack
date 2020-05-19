@@ -4,9 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace 保证唯一 我这里填写的是映射类的名字 xml文件名和映射类的名字是一样的-->
 <mapper namespace="com.anteater.fengfang.mapper.AuthMapper">
+    <update id="updatePass">
+        update userinfo set user_password = #{param1} where user_id = #{param2}
+    </update>
 
-
-    <select id="getUserbyLoginInfo" resultType="com.anteater.fengfang.domains.User">
-        select * from userinfo where (user_id = #{login_id} or user_email = #{login_id}) and user_password =#{login_password}
+    <select id="getUserbyLoginInfo" resultMap="com.anteater.fengfang.mapper.UserMapper.userMap">
+        <include refid="com.anteater.fengfang.mapper.UserMapper.userRole"></include>
+        where (a.user_id = #{login_id} or user_email = #{login_id}) and user_password =#{login_password}
+    </select>
+    <select id="checkPass" resultType="java.lang.Boolean">
+        select count(1) from userinfo where user_id=#{param1} and user_password = #{param2}
     </select>
 </mapper>

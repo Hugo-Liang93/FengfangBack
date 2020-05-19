@@ -1,5 +1,6 @@
 package com.anteater.fengfang.controller;
 
+import com.anteater.fengfang.domains.Clockin;
 import com.anteater.fengfang.domains.User;
 import com.anteater.fengfang.domains.auth.LoginInfo;
 import com.anteater.fengfang.mapper.AuthMapper;
@@ -21,26 +22,51 @@ public class UserController {
     private static Logger logger= Logger.getLogger(UserController.class);
     @Autowired
     private UserService userService;
-    @Autowired
-    private AuthService authService;
-
-    @RequestMapping(value = "/api/auth/login",method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String,Object> login(@RequestBody LoginInfo loginInfo){
-        logger.info(loginInfo.getLogin_id());
-        User user = authService.login(loginInfo);
-        Map<String,Object> claims =new HashMap<>();
-        claims.put("id",loginInfo.getLogin_id());
-        Map<String,Object> map =new HashMap<>();
-        map.put("userData",user);
-        map.put("accessToken",JwtTokenUtils.generatorToken(claims));
-        return map;
-    }
 
     @RequestMapping(value = "/api/user-management/users",method = RequestMethod.GET)
     @ResponseBody
     public List<User> userList(){
         List<User> userList = userService.getUserList();
         return userList;
+    }
+
+    @RequestMapping(value = "/api/user-management/userAccountInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean updateUserAccountInfo (@RequestBody  User user){
+        userService.updateUserAccountInfo(user);
+        return null;
+    }
+
+    @RequestMapping(value = "api/user-management/userUserInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean updateUserInfo (@RequestBody  User user){
+        userService.updateUserInfo(user);
+        return null;
+    }
+
+    @RequestMapping(value = "api/user-management/userUserSocialInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean updateUserSocialInfo (@RequestBody  User user){
+        userService.updateUserSocialInfo(user);
+        return null;
+    }
+
+    @RequestMapping(value = "/api/user-management/users/{user_id}",method = RequestMethod.GET)
+    @ResponseBody
+    public User user(@PathVariable String user_id){
+        return userService.getUserById(user_id);
+    }
+
+    @RequestMapping(value = "/api/user/clockin",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean clockIn(@RequestBody Clockin clockin){
+        logger.info(clockin);
+        return userService.clockIn(clockin);
+    }
+
+    @RequestMapping(value = "/api/user/clockin/{user_id}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Clockin> getClockInList(@PathVariable String user_id){
+        return userService.getThisMonthClockInListByUid(user_id);
     }
 }

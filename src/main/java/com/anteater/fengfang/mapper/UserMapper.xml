@@ -14,19 +14,24 @@
         <result property="user_position" column="user_position"></result>
         <result property="user_pic" column="user_pic"></result>
         <result property="user_email" column="user_email"></result>
+        <result property="user_phone" column="user_phone"></result>
+        <result property="user_birthday" column="user_birthday"></result>
+        <result property="user_gender" column="user_gender"></result>
+        <result property="user_idcard" column="user_idcard"></result>
         <!--   可进行分布查询 支持懒加载     -->
-        <association property="permisssion" javaType="com.anteater.fengfang.domains.Permisssion">
+        <association property="permission" javaType="com.anteater.fengfang.domains.Permission">
             <id property="role_id" column="role_id"></id>
             <result property="role_name" column="role_name"></result>
-            <result property="role_name_en" column="role_name"></result>
+            <result property="role_name_en" column="role_name_en"></result>
             <result property="active_post" column="active_post"></result>
             <result property="active_del" column="active_del"></result>
-            <result property="active_check" column="active_check"></result>
-            <result property="active_modify" column="active_modify"></result>
             <result property="active_search" column="active_search"></result>
+            <result property="active_modify" column="active_modify"></result>
+            <result property="active_check" column="active_check"></result>
             <result property="user_add" column="user_add"></result>
             <result property="user_del" column="user_del"></result>
             <result property="user_search" column="user_search"></result>
+            <result property="user_modify" column="user_modify"></result>
             <result property="clockin_export" column="clockin_export"></result>
             <result property="clockin_del" column="clockin_del"></result>
             <result property="clockin_search" column="clockin_search"></result>
@@ -34,13 +39,82 @@
             <result property="schedule_add" column="schedule_add"></result>
             <result property="schedule_del" column="schedule_del"></result>
             <result property="schedule_search" column="schedule_search"></result>
+            <result property="schedule_modify" column="schedule_modify"></result>
+        </association>
+
+        <association property="nativePlace" javaType="com.anteater.fengfang.domains.NativePlace">
+            <id property="user_id" column="user_id"></id>
+            <result property="native_province" column="native_province"></result>
+            <result property="native_city" column="native_city"></result>
+            <result property="native_address" column="native_address"></result>
+        </association>
+
+        <association property="social" javaType="com.anteater.fengfang.domains.Social">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_mobile" column="user_mobile"></result>
+            <result property="user_wechat" column="user_wechat"></result>
+            <result property="user_weibo" column="user_weibo"></result>
+        </association>
+
+        <association property="clockin" column="user_id" javaType="com.anteater.fengfang.domains.Clockin" select="com.anteater.fengfang.mapper.ClockInMapper.getTodayClockIn">
         </association>
     </resultMap>
+
+
+    <sql id="userRole">
+        select * from userinfo as a
+        left join user_permissions as b on a.role_id = b.role_id
+        left join user_nativeplace c on a.user_id =c.user_id
+        left join user_social d on a.user_id = d.user_id
+    </sql>
+
+    <update id="updateUserAccountInfo" parameterType="com.anteater.fengfang.domains.User">
+        update userinfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_name!= null" >user_name=#{user_name},</if>
+            <if test="user_company!= null" >user_company=#{user_company},</if>
+            <if test="user_office!= null" >user_office=#{user_office},</if>
+            <if test="user_hiredate!= null" >user_hiredate=#{user_hiredate},</if>
+            <if test="user_position!= null" >user_position=#{user_position},</if>
+            <if test="user_pic!= null" >user_pic=#{user_pic},</if>
+            <if test="user_dept!= null" >user_dept=#{user_dept},</if>
+            <if test="user_email!= null" >user_email=#{user_email},</if>
+            <if test="permission!= null" >role_id=#{permission.role_id},</if>
+        </trim>
+        where user_id = #{user_id}
+    </update>
+    <update id="updateUserInfo" parameterType="com.anteater.fengfang.domains.User">
+        update userinfo a left join user_nativeplace b on a.user_id=b.user_id
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_birthday!= null" >user_birthday=#{user_birthday},</if>
+            <if test="user_idcard!= null" >user_idcard=#{user_idcard},</if>
+            <if test="user_gender!= null" >user_gender=#{user_gender},</if>
+            <if test="nativePlace!= null" >
+                native_province=#{nativePlace.native_province},
+                native_city=#{nativePlace.native_city},
+                native_address=#{nativePlace.native_address},</if>
+        </trim>
+        where a.user_id = #{user_id}
+    </update>
+
+    <update id="updateUserSocialInfo" parameterType="com.anteater.fengfang.domains.User">
+        update userinfo a left join user_social b on a.user_id=b.user_id
+        <trim prefix="set" suffixOverrides=",">
+            <if test="social!= null" >
+                user_weibo=#{social.user_weibo},
+                user_wechat=#{social.user_wechat},
+                user_mobile=#{social.user_mobile},</if>
+        </trim>
+        where a.user_id = #{user_id}
+    </update>
+
+
     <select id="getAllUsers" resultMap="userMap">
-        select * from userinfo as a left join user_permissions as b on a.role_id = b.role_id
+        <include refid="userRole"></include>
     </select>
 
-    <select id="getUserById" resultType="com.anteater.fengfang.domains.User">
-        select * from userinfo where user_id = #{user_id}
+    <select id="getUserById" resultMap="userMap">
+        <include refid="userRole"></include>
+        where a.user_id = #{user_id}
     </select>
 </mapper>

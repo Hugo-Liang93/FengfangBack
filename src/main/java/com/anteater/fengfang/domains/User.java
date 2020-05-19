@@ -22,6 +22,12 @@ public class User {
     private String user_password;
     @JsonProperty(value = "email")
     private String user_email;
-    private Permisssion permisssion;
-    private List<Clockin> clockin;
+    private String user_phone;
+    private String user_birthday;
+    private String user_gender;
+    private String user_idcard;
+    private NativePlace nativePlace;
+    private Social social;
+    private Permission permission;
+    private Clockin clockin;
 }

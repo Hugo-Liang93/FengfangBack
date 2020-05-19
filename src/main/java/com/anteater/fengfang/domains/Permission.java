@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter@Setter@ToString
-public class Permisssion {
+public class Permission {
     private Integer role_id;
     private String role_name;
     private String role_name_en;
@@ -25,4 +25,5 @@ public class Permisssion {
     private Boolean schedule_add;
     private Boolean schedule_del;
     private Boolean schedule_search;
+    private Boolean schedule_modify;
 }

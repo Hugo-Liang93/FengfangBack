@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 保证唯一 我这里填写的是映射类的名字 xml文件名和映射类的名字是一样的-->
+<mapper namespace="com.anteater.fengfang.mapper.CalendarMapper">
+    <insert id="insertEvent" keyProperty="id">
+        insert into events (user_id,title,startDate,endDate,url,classes,label) values (#{user_id}, #{title},#{startDate}, #{endDate},#{url}, #{classes},#{label})
+    </insert>
+    <update id="updateEvent" parameterType="com.anteater.fengfang.domains.calendar.Events">
+        update events set title = #{title} ,startDate = #{startDate} , endDate = #{endDate} , classes = #{classes} , label = #{label}
+        where id = #{id}
+    </update>
+    <delete id="delEvent">
+        delete from events where id =#{event_id}
+    </delete>
+
+
+    <select id="getLabel" resultType="com.anteater.fengfang.domains.calendar.EventLabel">
+        select * from label
+    </select>
+    <select id="getEvemtsByUser" resultType="com.anteater.fengfang.domains.calendar.Events">
+        select * from events where user_id = #{user_id}
+    </select>
+</mapper>
