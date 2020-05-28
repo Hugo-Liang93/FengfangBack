@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anteater.fengfang.mapper.ProjectMapper">
+    <insert id="insertProject" useGeneratedKeys="true" keyProperty="project_id">
+        insert into project (project_name,project_desc) values (#{project_name},#{project_desc})
+    </insert>
+    <select id="checkProjectName" resultType="com.anteater.fengfang.domains.Project">
+        select * from project a where a.project_name = #{project_name}
+    </select>
+</mapper>
