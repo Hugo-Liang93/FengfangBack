@@ -10,4 +10,7 @@
     <select id="checkProjectName" resultType="com.anteater.fengfang.domains.Project">
         select * from project a where a.project_name = #{project_name}
     </select>
+    <select id="listProject" resultType="com.anteater.fengfang.domains.Project">
+        select * from project
+    </select>
 </mapper>

@@ -29,6 +29,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> listProject() {
-        return null;
+        return projectMapper.listProject();
     }
 }

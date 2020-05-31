@@ -22,7 +22,7 @@ public class UploadController {
     @RequestMapping("/api/project/listProject")
     @ResponseBody
     public List<Project> listProject(@RequestBody Project project){
-        return null;
+        return projectService.listProject();
     }
 
     @RequestMapping("/api/project/initProject")
