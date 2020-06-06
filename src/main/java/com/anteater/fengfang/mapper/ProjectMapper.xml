@@ -7,6 +7,12 @@
     <insert id="insertProject" useGeneratedKeys="true" keyProperty="project_id">
         insert into project (project_name,project_desc) values (#{project_name},#{project_desc})
     </insert>
+    <update id="updateProject">
+        update project a set a.project_name = #{project_name},a.project_desc = #{project_desc} where a.project_id = #{project_id}
+    </update>
+    <delete id="removeProject">
+        delete from project where project_id = #{project_id}
+    </delete>
     <select id="checkProjectName" resultType="com.anteater.fengfang.domains.Project">
         select * from project a where a.project_name = #{project_name}
     </select>

@@ -23,7 +23,7 @@
         (2)允许使用"/"做整体映射
      -->
     <mvc:default-servlet-handler/>
-    
+    <mvc:resources mapping="/images/**" location="/WEB-INF/file/" cache-period="31556926"/>
     <!--  定义拦截器  -->
     <mvc:interceptors>
         <mvc:interceptor>

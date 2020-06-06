@@ -16,19 +16,29 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     ProjectMapper projectMapper;
     @Override
-    public Boolean initProject(Project project) {
+    public String initProject(Project project) {
         List<Project> searchProject = projectMapper.checkProjectName(project.getProject_name());
         if(searchProject.size()==0){
             projectMapper.insertProject(project);
             if (project.getProject_id() == null){
-                return false;
-            }else return true;
+                return null;
+            }else return project.getProject_id();
         }
-        return false;
+        return null;
     }
 
     @Override
     public List<Project> listProject() {
         return projectMapper.listProject();
+    }
+
+    @Override
+    public Boolean removeProject(String projectId) {
+        return projectMapper.removeProject(projectId);
+    }
+
+    @Override
+    public Boolean updateProject(Project project) {
+        return projectMapper.updateProject(project);
     }
 }
