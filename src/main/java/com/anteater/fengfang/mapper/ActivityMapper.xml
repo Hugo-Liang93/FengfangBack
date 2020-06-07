@@ -8,8 +8,14 @@
     <insert id="addActivity" useGeneratedKeys="true" keyProperty="id" parameterType="com.anteater.fengfang.domains.Activity">
         insert into activity (title,content,startDate,endDate,owner,company) values (#{title},#{content},#{startDate},#{endDate},#{owner},#{company})
     </insert>
+    <update id="updateActivity">
+        update activity a set a.title= #{title} , a.content = #{content}, a.startDate = #{startDate} ,a.endDate=#{endDate} ,a.company =#{company} where a.id=#{id}
+    </update>
+    <delete id="deleteActivityById">
+        delete from activity a where a.id = #{id}
+    </delete>
     <select id="getActivityByCompany" resultType="com.anteater.fengfang.domains.Activity">
-        select * from activity where company = #{company} and company= 'admin'
+        select * from activity where company = #{company} or company= 'admin'
     </select>
 
 

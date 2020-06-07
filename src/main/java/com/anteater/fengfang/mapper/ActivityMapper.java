@@ -9,4 +9,7 @@ import java.util.List;
 public interface ActivityMapper {
     Integer addActivity(Activity activity);
     List<Activity> getActivityByCompany(String company);
+    Boolean updateActivity(Activity activity);
+
+    Boolean deleteActivityById(String activityId);
 }

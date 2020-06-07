@@ -17,7 +17,7 @@
         insert into user_clockin (user_id,clockin_path,clockin_time,clockin_lng,clockin_lat) values (#{user_id},#{clockin_path},now(),#{clockin_lng},#{clockin_lng})
     </insert>
 
-    <select id="getTodayClockIn" resultMap="clockInMap" useCache="false">
+    <select id="getTodayClockIn" resultMap="clockInMap">
         select * from user_clockin where user_id = #{user_id} and to_days(clockin_time) = to_days(now())
     </select>
 

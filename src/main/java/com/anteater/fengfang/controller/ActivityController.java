@@ -20,15 +20,34 @@ public class ActivityController {
     @RequestMapping(value="/api/Activity/saveInfo")
     @ResponseBody
     public Activity saveActivity(@RequestBody Activity activity){
-        logger.info(activity);
         activityService.addActivity(activity);
         return activity;
     }
 
+    @RequestMapping(value="/api/Activity/updateInfo")
+    @ResponseBody
+    public Boolean updateActivity(@RequestBody Activity activity){
+        logger.info(activity);
+        return activityService.updateActivity(activity);
+    }
+
+    @RequestMapping(value="/api/Activity/deleteInfo")
+    @ResponseBody
+    public Boolean deleteActivity(@RequestBody String  activityId){
+        logger.info(activityId);
+        return activityService.deleteActivity(activityId);
+    }
+
+
 
     @RequestMapping(value="api/Activity/getActivityByCompany")
-    public List<Activity> getActivity(String Company){
-        logger.info(Company);
+    @ResponseBody
+    public List<Activity> getActivity(@RequestBody String company){
+        return activityService.getActivityByCompany(company);
+    }
+
+    @RequestMapping(value="api/Activity/api/Activity/listActivity")
+    public List<Activity> listActivity(){
         return null;
     }
 }

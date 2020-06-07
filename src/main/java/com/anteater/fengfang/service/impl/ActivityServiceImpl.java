@@ -18,7 +18,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public Boolean updateActivity(Activity activity) {
+        return acitivityMapper.updateActivity(activity);
+    }
+
+    @Override
     public List<Activity> getActivityByCompany(String company) {
-        return null;
+        return acitivityMapper.getActivityByCompany(company);
+    }
+
+    @Override
+    public Boolean deleteActivity(String activityId) {
+        return acitivityMapper.deleteActivityById(activityId);
     }
 }
