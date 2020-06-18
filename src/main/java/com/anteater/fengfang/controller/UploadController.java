@@ -1,5 +1,6 @@
 package com.anteater.fengfang.controller;
 
+import com.anteater.fengfang.domains.Detail;
 import com.anteater.fengfang.domains.Project;
 import com.anteater.fengfang.service.ProjectService;
 import org.apache.log4j.Logger;
@@ -99,7 +100,6 @@ public class UploadController {
         for(File file: temList){
             if(file.isFile() && file.getName().split("_")[1].equals("houseType")){
                 resList.add(file.getName());
-                if (resList.size()==5) return resList;
             }
         }
         return resList;
@@ -136,5 +136,24 @@ public class UploadController {
             }
             return true;
         } else return false;
+    }
+
+    @RequestMapping("/api/Detail/saveDetail")
+    @ResponseBody
+    public Boolean saveDetail(@RequestBody Detail detail){
+        return projectService.saveDetail(detail);
+    }
+
+    @RequestMapping("/api/Detail/getDetail")
+    @ResponseBody
+    public List<Detail> getDetail(){
+        return projectService.getDetail();
+    }
+
+    @RequestMapping("/api/Detail/delete")
+    @ResponseBody
+    public Boolean removeDetail(@RequestBody String detailId){
+        logger.info(detailId);
+        return projectService.removeDetail(detailId);
     }
 }
