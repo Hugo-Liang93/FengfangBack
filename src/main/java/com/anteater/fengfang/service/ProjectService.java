@@ -14,4 +14,5 @@ public interface ProjectService {
     List<Detail> getDetail();
 
     Boolean removeDetail(String detailId);
+    Boolean updateDetail(Detail detail);
 }

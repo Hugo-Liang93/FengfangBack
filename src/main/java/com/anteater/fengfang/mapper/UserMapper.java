@@ -1,5 +1,6 @@
 package com.anteater.fengfang.mapper;
 
+import com.anteater.fengfang.domains.NativePlace;
 import com.anteater.fengfang.domains.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,4 +15,10 @@ public interface UserMapper {
     Integer updateUserInfo(User user);
 
     Integer updateUserSocialInfo(User user);
+
+    Boolean addUser(User user);
+
+    Boolean addNativePlace(NativePlace nativePlace);
+
+    Boolean delUser(String user_id);
 }

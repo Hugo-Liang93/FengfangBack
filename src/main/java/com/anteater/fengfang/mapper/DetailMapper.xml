@@ -5,8 +5,11 @@
 <!--namespace 保证唯一 我这里填写的是映射类的名字 xml文件名和映射类的名字是一样的-->
 <mapper namespace="com.anteater.fengfang.mapper.DetailMapper">
     <insert id="saveDetail" useGeneratedKeys="true" keyProperty="id"  parameterType="com.anteater.fengfang.domains.Detail">
-        insert into detail (detail_title,pic) values (#{detail_title},#{pic})
+        insert into detail (detail_title,type_id,fileName,detail_type) values (#{detail_title},#{type_id},#{fileName},#{detail_type})
     </insert>
+    <update id="updateDetail">
+        update detail a set a.detail_title=#{detail_title}, a.type_id=#{type_id} , a.fileName=#{fileName}, a.detail_type =#{detail_type} where a.id =#{id}
+    </update>
     <delete id="removeDetailById">
         delete from detail where id = #{detailId}
     </delete>

@@ -30,7 +30,7 @@ public class User {
     private Social social;
     private Permission permission;
     private Clockin clockin;
-
+    private String role_id;
     @Override
     public String toString() {
         return "User{" +

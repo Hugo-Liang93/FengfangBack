@@ -1,6 +1,7 @@
 package com.anteater.fengfang.service.impl;
 
 import com.anteater.fengfang.domains.Clockin;
+import com.anteater.fengfang.domains.NativePlace;
 import com.anteater.fengfang.domains.User;
 import com.anteater.fengfang.domains.auth.LoginInfo;
 import com.anteater.fengfang.mapper.AuthMapper;
@@ -58,6 +59,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Clockin> getThisMonthClockInListByUid(String user_id) {
         return clockInMapper.getThisMonthClockInListByUid(user_id);
+    }
+
+    @Override
+    public Boolean addUser(User user) {
+        user.getNativePlace().setUser_id(user.getUser_id());
+        return userMapper.addUser(user) && userMapper.addNativePlace(user.getNativePlace());
+    }
+
+    @Override
+    public Boolean delUser(String user_id) {
+        return userMapper.delUser(user_id);
     }
 
 

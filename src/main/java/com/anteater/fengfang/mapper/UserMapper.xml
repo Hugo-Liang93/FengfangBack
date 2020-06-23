@@ -68,6 +68,17 @@
         left join user_social d on a.user_id = d.user_id
     </sql>
 
+    <insert id="addUser" parameterType="com.anteater.fengfang.domains.User">
+        insert into userinfo (user_id,user_name,user_email,user_company,user_office,user_dept,role_id,user_position,user_hiredate,user_birthday,user_idcard,
+        user_gender,user_phone) values (#{user_id},#{user_name},#{user_email},#{user_company},#{user_office},#{user_dept},#{role_id},#{user_position},#{user_hiredate},#{user_birthday},#{user_idcard},
+        #{user_gender},#{user_phone})
+    </insert>
+
+    <insert id="addNativePlace" parameterType="com.anteater.fengfang.domains.NativePlace">
+        insert  into user_nativeplace(user_id,native_province,native_city,native_address)
+        values(#{user_id},#{native_province},#{native_city},#{native_address})
+    </insert>
+
     <update id="updateUserAccountInfo" parameterType="com.anteater.fengfang.domains.User">
         update userinfo
         <trim prefix="set" suffixOverrides=",">
@@ -107,6 +118,9 @@
         </trim>
         where a.user_id = #{user_id}
     </update>
+    <delete id="delUser">
+        delete from userinfo where user_id = #{user_id}
+    </delete>
 
 
     <select id="getAllUsers" resultMap="userMap">

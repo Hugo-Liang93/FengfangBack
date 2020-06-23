@@ -10,4 +10,5 @@ public class NativePlace {
     private String native_province;
     private String native_city;
     private String native_address;
+
 }

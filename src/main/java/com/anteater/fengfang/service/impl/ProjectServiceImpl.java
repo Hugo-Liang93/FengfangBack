@@ -63,4 +63,9 @@ public class ProjectServiceImpl implements ProjectService {
     public Boolean removeDetail(String detailId) {
         return detailMapper.removeDetailById(detailId);
     }
+
+    @Override
+    public Boolean updateDetail(Detail detail) {
+        return detailMapper.updateDetail(detail);
+    }
 }

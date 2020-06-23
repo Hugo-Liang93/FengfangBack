@@ -69,4 +69,17 @@ public class UserController {
     public List<Clockin> getClockInList(@PathVariable String user_id){
         return userService.getThisMonthClockInListByUid(user_id);
     }
+
+    @RequestMapping(value = "api/user-management/user-add",method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean addUser (@RequestBody  User user){
+        logger.info(user.toString());
+        return userService.addUser(user);
+    }
+
+    @RequestMapping(value = "api/user-management/user-del/{user_id}",method = RequestMethod.GET)
+    @ResponseBody
+    public Boolean delUser (@PathVariable  String  user_id){
+        return userService.delUser(user_id);
+    }
 }

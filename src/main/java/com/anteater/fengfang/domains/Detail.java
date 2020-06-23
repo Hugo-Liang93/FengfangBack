@@ -7,5 +7,7 @@ import lombok.Setter;
 public class Detail {
     String id;
     String detail_title;
-    String pic;
+    String detail_type;
+    String type_id;
+    String fileName;
 }

@@ -7,8 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface DetailMapper {
-    void saveDetail(Detail detail);
+    Boolean saveDetail(Detail detail);
     List<Detail> getDetail();
 
     Boolean removeDetailById(String detailId);
+
+    Boolean updateDetail(Detail detail);
 }

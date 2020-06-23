@@ -54,8 +54,13 @@ public class UploadController {
         }
         // 获取文件存储路径（绝对路径）
         String path = req.getServletContext().getRealPath("/WEB-INF/file");
+        String fileName;
+        logger.info(file_type);
         // 获取原文件名
-        String fileName = project_id+"_"+file_type+"_"+file.getOriginalFilename();
+        if(file_type.equals("detail")){
+            fileName = file_type+"_"+file.getOriginalFilename();
+        }else fileName = project_id+"_"+file_type+"_"+file.getOriginalFilename();
+
         // 创建文件实例
         File filePath = new File(path, fileName);
         // 如果文件目录不存在，创建目录
@@ -65,7 +70,7 @@ public class UploadController {
         }
         // 写入文件
         file.transferTo(filePath);
-        return "success";
+        return fileName;
     }
 
     @RequestMapping("/api/project/getFiles/{project_id}")
@@ -107,7 +112,6 @@ public class UploadController {
 
     @RequestMapping("/api/download")
     public ResponseEntity<byte[]> fileDownLoad(@RequestBody String fileName,HttpServletRequest req) throws Exception{
-        logger.info(fileName);
         String path = req.getServletContext().getRealPath("/WEB-INF/file/"+fileName);
         InputStream in=new FileInputStream(new File(path));//将该文件加入到输入流之中
         byte[] body=null;
@@ -142,6 +146,12 @@ public class UploadController {
     @ResponseBody
     public Boolean saveDetail(@RequestBody Detail detail){
         return projectService.saveDetail(detail);
+    }
+
+    @RequestMapping("/api/Detail/updateDetail")
+    @ResponseBody
+    public Boolean updateDetail(@RequestBody Detail detail){
+        return projectService.updateDetail(detail);
     }
 
     @RequestMapping("/api/Detail/getDetail")
