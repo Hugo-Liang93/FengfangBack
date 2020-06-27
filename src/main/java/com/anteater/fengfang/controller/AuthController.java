@@ -42,7 +42,7 @@ public class AuthController {
 
     @RequestMapping(value = "/api/auth/changePass",method = RequestMethod.POST)
     @ResponseBody
-    public ResBody login(@RequestBody Map<String,String> map){
+    public ResBody changePass(@RequestBody Map<String,String> map){
 
         return  authService.changePass(map);
     }

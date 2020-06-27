@@ -51,14 +51,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResBody changePass(Map<String, String> map) {
         ResBody resBody = new ResBody();
-        if (authMapper.checkPass(map.get("user_id"),map.get("oldPass"))){
-            resBody.setStatus(authMapper.updatePass(map.get("newPass"),map.get("user_id")));
-            return resBody;
-        } else {
-            resBody.setStatus(false);
-            resBody.setErrorMsg("密码不正确");
-            return resBody;
-        }
-
+        resBody.setStatus(authMapper.updatePass(map.get("newPass"),map.get("user_id")));
+        return resBody;
     }
 }
