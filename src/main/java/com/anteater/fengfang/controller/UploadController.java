@@ -52,6 +52,7 @@ public class UploadController {
         if(file.isEmpty() || project_id == null){
             return "failed";
         }
+
         // 获取文件存储路径（绝对路径）
         String path = req.getServletContext().getRealPath("/WEB-INF/file");
         String fileName;
@@ -70,6 +71,7 @@ public class UploadController {
         }
         // 写入文件
         file.transferTo(filePath);
+        logger.info(fileName);
         return fileName;
     }
 
@@ -126,20 +128,15 @@ public class UploadController {
         return response;
     }
 
-    @RequestMapping("/api/project/delete")
+    @RequestMapping("/api/project/deleteFile")
     @ResponseBody
-    public Boolean removeProject(@RequestBody String projectId, HttpServletRequest req){
-        String path = req.getServletContext().getRealPath("/WEB-INF/file");
-        if(projectService.removeProject(projectId)){
-            File filePath = new File(path);
-            File[] temList = filePath.listFiles();
-            for(File file: temList){
-                if(file.isFile() && file.getName().split("_")[0].equals(projectId)){
-                    file.delete();
-                }
-            }
+    public Boolean deleteFile(@RequestBody String file_name, HttpServletRequest req){
+        String path = req.getServletContext().getRealPath("/WEB-INF/file/"+file_name);
+        File filePath = new File(path);
+        if(filePath.exists()){
+            filePath.delete();
             return true;
-        } else return false;
+        }else return false;
     }
 
     @RequestMapping("/api/Detail/saveDetail")
