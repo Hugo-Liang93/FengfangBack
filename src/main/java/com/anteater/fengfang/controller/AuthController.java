@@ -24,7 +24,6 @@ public class AuthController {
     @RequestMapping(value = "/api/auth/login",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> login(@RequestBody LoginInfo loginInfo){
-
         User user = authService.login(loginInfo);
         Map<String,Object> claims =new HashMap<>();
         claims.put("id",loginInfo.getLogin_id());

@@ -86,7 +86,6 @@ public class UploadController {
         File[] temList = filePath.listFiles();
         for(File file: temList){
             if(file.isFile() && file.getName().split("_")[0].equals(project_id)){
-                logger.info(file.getName().split("_")[1]);
                 if(file.getName().split("_")[1].equals("attach")){
                     attachList.add(file.getName());
                 }else houseTypeList.add(file.getName());
