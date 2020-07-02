@@ -87,22 +87,5 @@ public class UserController {
         return userService.delUser(user_id);
     }
 
-    @RequestMapping("api/user-management/upload/avatar/{user_id}")
-    @ResponseBody
-    public String uploadAvatar(@RequestParam("file") MultipartFile file,@PathVariable String user_id, HttpServletRequest req) throws IOException {
-        if(file.isEmpty() || file ==null){
-            return "failed";
-        }
-        String path = req.getServletContext().getRealPath("/WEB-INF/file");
-        String fileName=user_id+"_avatar_"+file.getOriginalFilename();
-        // 创建文件实例
-        File filePath = new File(path, fileName);
-        // 如果文件目录不存在，创建目录
-        if (!filePath.getParentFile().exists()) {
-            filePath.getParentFile().mkdirs();
-        }
-        // 写入文件
-        file.transferTo(filePath);
-        return "images/"+fileName;
-    }
+
 }

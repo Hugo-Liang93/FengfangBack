@@ -35,6 +35,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/api/**"/>
             <mvc:exclude-mapping path="/**/login"/>
+<!--            <mvc:exclude-mapping path="/**/api/user-management/upload/avatar/**"/>-->
             <bean class="com.anteater.fengfang.interceptor.AuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
