@@ -8,14 +8,59 @@
     <insert id="addActivity" useGeneratedKeys="true" keyProperty="id" parameterType="com.anteater.fengfang.domains.Activity">
         insert into activity (title,content,startDate,endDate,owner,company) values (#{title},#{content},#{startDate},#{endDate},#{owner},#{company})
     </insert>
+    <insert id="addLikeFlag">
+        insert into like_flag (like_flag_activity_id,like_flag_user_id) values (#{param1}, #{param2})
+    </insert>
+    <insert id="postMsg">
+        insert into like_post (like_activity_id , like_user_id , like_comment, like_comment_date) values (#{param1},#{param2},#{param3},now())
+    </insert>
     <update id="updateActivity">
         update activity a set a.title= #{title} , a.content = #{content}, a.startDate = #{startDate} ,a.endDate=#{endDate} ,a.company =#{company} where a.id=#{id}
     </update>
     <delete id="deleteActivityById">
         delete from activity a where a.id = #{id}
     </delete>
-    <select id="getActivityByCompany" resultType="com.anteater.fengfang.domains.Activity">
-        select * from activity where company = #{company} or company= 'admin'
+    <delete id="deleteLikeFlag">
+        delete from like_flag a where a.like_flag_activity_id = #{param1} and a.like_flag_user_id = #{param2}
+    </delete>
+    <select id="getActivityByCompany" resultMap="activity">
+        select * from activity a left join userinfo b on a.owner = b.user_id
+        where a.company = #{company} or a.company= 'admin'
+    </select>
+
+    <resultMap id="Comment" type="com.anteater.fengfang.domains.Comment">
+        <id property="like_id" column="like_id"></id>
+        <result property="like_comment" column="like_comment"></result>
+        <result property="like_comment_date" column="like_comment_date"></result>
+        <association property="user" javaType="com.anteater.fengfang.domains.User">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_name" column="user_name"></result>
+            <result property="user_pic" column="user_pic"></result>
+        </association>
+    </resultMap>
+
+    <resultMap id="activity" type="com.anteater.fengfang.domains.Activity">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="content" column="content"></result>
+        <result property="startDate" column="startDate"></result>
+        <result property="endDate" column="endDate"></result>
+        <result property="company" column="company"></result>
+        <association property="user" javaType="com.anteater.fengfang.domains.User">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_name" column="user_name"></result>
+            <result property="user_pic" column="user_pic"></result>
+        </association>
+    </resultMap>
+
+    <select id="getCommentByActivityId"  resultMap="Comment">
+        select * from like_post a left  join userinfo b on a.like_user_id = b.user_id
+        where a.like_activity_id = #{like_activity_id} order by a.like_comment_date
+    </select>
+
+    <select id="getLikePost" resultType="com.anteater.fengfang.domains.User">
+        select user_id,user_name,user_pic from like_flag a left  join userinfo b on a.like_flag_user_id = b.user_id
+        where a.like_flag_activity_id = #{like_flag_activity_id}
     </select>
 
 

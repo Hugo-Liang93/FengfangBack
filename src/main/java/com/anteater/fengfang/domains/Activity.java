@@ -13,4 +13,5 @@ public class Activity {
     private String endDate;
     private String owner;
     private String company;
+    private User user;
 }

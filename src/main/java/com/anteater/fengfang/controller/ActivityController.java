@@ -1,15 +1,16 @@
 package com.anteater.fengfang.controller;
 
 import com.anteater.fengfang.domains.Activity;
+import com.anteater.fengfang.domains.Comment;
+import com.anteater.fengfang.domains.User;
 import com.anteater.fengfang.service.ActivityService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ActivityController {
@@ -49,5 +50,30 @@ public class ActivityController {
     @RequestMapping(value="api/Activity/api/Activity/listActivity")
     public List<Activity> listActivity(){
         return null;
+    }
+
+    @RequestMapping(value="api/Activity/comment/{activity_id}")
+    @ResponseBody
+    public List<Comment> getCommentByActivityId(@PathVariable String activity_id){
+        return activityService.getCommentByActivityId(activity_id);
+    }
+
+    @RequestMapping(value="api/Activity/likepost/{activity_id}")
+    @ResponseBody
+    public List<User> getLikePostByActivityId(@PathVariable String activity_id){
+        return activityService.getLikePostByActivityId(activity_id);
+    }
+
+    @RequestMapping(value="api/Activity/changelinked/{activity_id}/{userId}")
+    @ResponseBody
+    public Boolean changeLinked(@PathVariable String activity_id,@PathVariable String userId){
+        return activityService.changeLinked(activity_id,userId);
+    }
+
+    @RequestMapping(value="api/Activity/postComment/{activity_id}/{userId}")
+    @ResponseBody
+    public Boolean postComment(@PathVariable String activity_id,@PathVariable String userId,@RequestBody Map<String,String> map){
+        logger.info(activity_id + "  " + userId + " "+ map.get("comment") );
+        return activityService.postMsg(activity_id,userId,map.get("comment"));
     }
 }

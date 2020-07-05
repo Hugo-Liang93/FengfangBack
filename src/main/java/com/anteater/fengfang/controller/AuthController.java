@@ -17,7 +17,6 @@ import java.util.Map;
 
 @Controller
 public class AuthController {
-    private static Logger logger= Logger.getLogger(AuthController.class);
     @Autowired
     private AuthService authService;
 
