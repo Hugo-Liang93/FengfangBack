@@ -24,4 +24,6 @@ public interface ActivityMapper {
     Boolean addLikeFlag(String activity_id, String user_id);
 
     Boolean postMsg(String activity_id, String user_id,String msg);
+
+    List<Comment> getAllComment();
 }

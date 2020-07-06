@@ -76,4 +76,10 @@ public class ActivityController {
         logger.info(activity_id + "  " + userId + " "+ map.get("comment") );
         return activityService.postMsg(activity_id,userId,map.get("comment"));
     }
+
+    @RequestMapping(value="api/Activity/getComments")
+    @ResponseBody
+    public List<Comment> getAllComment(){
+        return activityService.getAllComment();
+    }
 }

@@ -64,4 +64,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Boolean postMsg(String activity_id, String user_id, String msg) {
         return acitivityMapper.postMsg(activity_id,user_id,msg);
     }
+
+    @Override
+    public List<Comment> getAllComment() {
+        return acitivityMapper.getAllComment();
+    }
 }

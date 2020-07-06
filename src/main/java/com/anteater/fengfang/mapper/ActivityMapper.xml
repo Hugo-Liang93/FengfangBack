@@ -63,5 +63,26 @@
         where a.like_flag_activity_id = #{like_flag_activity_id}
     </select>
 
+    <resultMap id="allComment" type="com.anteater.fengfang.domains.Comment">
+        <id property="like_id" column="like_id"></id>
+        <result property="like_comment" column="like_comment"></result>
+        <result property="like_comment_date" column="like_comment_date"></result>
+        <result property="flag" column="flag"></result>
+        <association property="user" javaType="com.anteater.fengfang.domains.User">
+            <id property="user_id" column="user_id"></id>
+            <result property="user_name" column="user_name"></result>
+            <result property="user_pic" column="user_pic"></result>
+        </association>
+        <association property="activity" javaType="com.anteater.fengfang.domains.Activity">
+            <id property="id" column="id"></id>
+            <result property="title" column="title"></result>
+            <result property="company" column="company"></result>
+        </association>
+    </resultMap>
+
+    <select id="getAllComment" resultMap="allComment">
+        select * from like_post a left join activity b on a.like_id = b.id
+        left join userinfo c on a.like_user_id = c.user_id
+    </select>
 
 </mapper>
