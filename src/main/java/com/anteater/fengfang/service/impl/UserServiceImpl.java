@@ -18,8 +18,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private ClockInMapper clockInMapper;
 
     @Override
     public void logout() {
@@ -49,16 +47,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean updateUserSocialInfo(User user) {
         return userMapper.updateUserSocialInfo(user)>0?true:false;
-    }
-
-    @Override
-    public Boolean clockIn(Clockin clockin) {
-        return clockInMapper.insertClockIn(clockin)>0?true:false;
-    }
-
-    @Override
-    public List<Clockin> getThisMonthClockInListByUid(String user_id) {
-        return clockInMapper.getThisMonthClockInListByUid(user_id);
     }
 
     @Override

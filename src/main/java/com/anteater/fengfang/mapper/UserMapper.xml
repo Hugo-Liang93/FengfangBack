@@ -56,8 +56,8 @@
             <result property="user_weibo" column="user_weibo"></result>
         </association>
 
-        <association property="clockin" column="user_id" javaType="com.anteater.fengfang.domains.Clockin" select="com.anteater.fengfang.mapper.ClockInMapper.getTodayClockIn">
-        </association>
+<!--        <association property="clockin" column="user_id" javaType="com.anteater.fengfang.domains.Clockin" select="com.anteater.fengfang.mapper.ClockInMapper.getTodayClockIn">-->
+<!--        </association>-->
     </resultMap>
 
 

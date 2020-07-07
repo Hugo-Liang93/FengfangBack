@@ -61,18 +61,9 @@ public class UserController {
         return userService.getUserById(user_id);
     }
 
-    @RequestMapping(value = "/api/user/clockin",method = RequestMethod.POST)
-    @ResponseBody
-    public Boolean clockIn(@RequestBody Clockin clockin){
-        logger.info(clockin);
-        return userService.clockIn(clockin);
-    }
 
-    @RequestMapping(value = "/api/user/clockin/{user_id}",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Clockin> getClockInList(@PathVariable String user_id){
-        return userService.getThisMonthClockInListByUid(user_id);
-    }
+
+
 
     @RequestMapping(value = "api/user-management/user-add",method = RequestMethod.POST)
     @ResponseBody

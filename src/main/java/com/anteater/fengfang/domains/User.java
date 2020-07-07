@@ -29,29 +29,5 @@ public class User {
     private NativePlace nativePlace;
     private Social social;
     private Permission permission;
-    private Clockin clockin;
     private String role_id;
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", user_company='" + user_company + '\'' +
-                ", user_dept='" + user_dept + '\'' +
-                ", user_office='" + user_office + '\'' +
-                ", user_hiredate='" + user_hiredate + '\'' +
-                ", user_position='" + user_position + '\'' +
-                ", user_pic='" + user_pic + '\'' +
-                ", user_password='" + user_password + '\'' +
-                ", user_email='" + user_email + '\'' +
-                ", user_phone='" + user_phone + '\'' +
-                ", user_birthday='" + user_birthday + '\'' +
-                ", user_gender='" + user_gender + '\'' +
-                ", user_idcard='" + user_idcard + '\'' +
-                ", nativePlace=" + nativePlace +
-                ", social=" + social +
-                ", permission=" + permission +
-                ", clockin=" + clockin +
-                '}';
-    }
 }

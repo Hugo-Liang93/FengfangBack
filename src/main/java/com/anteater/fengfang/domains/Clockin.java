@@ -11,16 +11,5 @@ public class Clockin {
     private String clockin_time;
     private String clockin_lng;
     private String clockin_lat;
-
-    @Override
-    public String toString() {
-        return "Clockin{" +
-                "id=" + id +
-                ", user_id='" + user_id + '\'' +
-                ", clockin_path='" + clockin_path + '\'' +
-                ", clockin_time='" + clockin_time + '\'' +
-                ", clockin_lng='" + clockin_lng + '\'' +
-                ", clockin_lat='" + clockin_lat + '\'' +
-                '}';
-    }
+    private String clockin_type;
 }
