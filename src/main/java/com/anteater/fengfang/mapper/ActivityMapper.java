@@ -26,4 +26,6 @@ public interface ActivityMapper {
     Boolean postMsg(String activity_id, String user_id,String msg);
 
     List<Comment> getAllComment();
+
+    Boolean updateCommentFlag(String ls,String type);
 }

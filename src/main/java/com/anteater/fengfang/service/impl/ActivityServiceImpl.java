@@ -69,4 +69,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Comment> getAllComment() {
         return acitivityMapper.getAllComment();
     }
+
+    @Override
+    public Boolean updateCommentStatus(String ls, String type) {
+        return acitivityMapper.updateCommentFlag(ls,type);
+    }
 }

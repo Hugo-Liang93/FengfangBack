@@ -21,4 +21,6 @@ public interface ActivityService {
     Boolean postMsg(String activity_id, String user_id,String msg);
 
     List<Comment> getAllComment();
+
+    Boolean updateCommentStatus(String ls,String type);
 }

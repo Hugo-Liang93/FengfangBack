@@ -82,4 +82,10 @@ public class ActivityController {
     public List<Comment> getAllComment(){
         return activityService.getAllComment();
     }
+
+    @RequestMapping(value="api/Activity/Comments/{statusType}")
+    @ResponseBody
+    public Boolean CommentPass(@PathVariable String statusType, @RequestBody  Map<String,String> map ){
+        return activityService.updateCommentStatus(map.get("passLs"),statusType);
+    }
 }

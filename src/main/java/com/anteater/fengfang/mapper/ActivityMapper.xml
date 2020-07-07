@@ -17,6 +17,9 @@
     <update id="updateActivity">
         update activity a set a.title= #{title} , a.content = #{content}, a.startDate = #{startDate} ,a.endDate=#{endDate} ,a.company =#{company} where a.id=#{id}
     </update>
+    <update id="updateCommentFlag">
+        update like_post set flag = #{param2} where like_id in (${param1})
+    </update>
     <delete id="deleteActivityById">
         delete from activity a where a.id = #{id}
     </delete>
@@ -55,7 +58,7 @@
 
     <select id="getCommentByActivityId"  resultMap="Comment">
         select * from like_post a left  join userinfo b on a.like_user_id = b.user_id
-        where a.like_activity_id = #{like_activity_id} order by a.like_comment_date
+        where a.like_activity_id = #{like_activity_id} and flag="true" order by a.like_comment_date
     </select>
 
     <select id="getLikePost" resultType="com.anteater.fengfang.domains.User">
@@ -81,7 +84,7 @@
     </resultMap>
 
     <select id="getAllComment" resultMap="allComment">
-        select * from like_post a left join activity b on a.like_id = b.id
+        select * from like_post a left join activity b on a.like_activity_id = b.id
         left join userinfo c on a.like_user_id = c.user_id
     </select>
 
