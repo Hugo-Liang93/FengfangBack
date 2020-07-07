@@ -8,6 +8,6 @@ import java.util.List;
 @Mapper
 public interface ClockInMapper {
     Integer insertClockIn(Clockin clockin);
-    Clockin getTodayClockIn(String user_id);
+    Clockin getTodayClockIn(String user_id,String clockinType);
     List<Clockin> getThisMonthClockInListByUid(String user_id);
 }

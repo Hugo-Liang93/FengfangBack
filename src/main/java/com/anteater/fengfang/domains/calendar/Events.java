@@ -15,4 +15,5 @@ public class Events {
     private String classes;
     private String label;
     private String style;
+    private String user_company;
 }

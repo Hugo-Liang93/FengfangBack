@@ -13,7 +13,9 @@ public interface UserService {
     Boolean updateUserAccountInfo(User user);
     Boolean updateUserInfo(User user);
     Boolean updateUserSocialInfo(User user);
+
     Boolean clockIn(Clockin clockin);
+
     List<Clockin> getThisMonthClockInListByUid(String user_id);
 
     Boolean addUser(User user);
