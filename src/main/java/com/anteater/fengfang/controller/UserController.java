@@ -29,8 +29,8 @@ public class UserController {
 
     @RequestMapping(value = "/api/user-management/users",method = RequestMethod.GET)
     @ResponseBody
-    public List<User> userList(){
-        List<User> userList = userService.getUserList();
+    public List<User> userList(String userId,String roleId){
+        List<User> userList = userService.getUserList(userId,roleId);
         return userList;
     }
 

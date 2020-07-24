@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
     public void logout();
-    List<User> getUserList();
+    List<User> getUserList(String user_id,String role_id);
     User getUserById(String user_id);
     Boolean updateUserAccountInfo(User user);
     Boolean updateUserInfo(User user);

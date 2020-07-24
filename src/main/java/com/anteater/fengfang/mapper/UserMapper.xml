@@ -125,6 +125,8 @@
 
     <select id="getAllUsers" resultMap="userMap">
         <include refid="userRole"></include>
+        where a.user_company in ( select user_company from userinfo where user_id = #{param1}) or
+        case when #{param2} = 1 then true else false end
     </select>
 
     <select id="getUserById" resultMap="userMap">

@@ -26,9 +26,20 @@
     <delete id="deleteLikeFlag">
         delete from like_flag a where a.like_flag_activity_id = #{param1} and a.like_flag_user_id = #{param2}
     </delete>
+
+    <delete id="delComments"  parameterType="String">
+        delete from like_post where like_id in
+
+        <foreach item="item"  collection="array" open="(" separator="," close=")">
+
+        #{item}
+
+        </foreach>
+    </delete>
+
     <select id="getActivityByCompany" resultMap="activity">
         select * from activity a left join userinfo b on a.owner = b.user_id
-        where a.company = #{company} or a.company= 'admin'
+        where a.company = #{company} or a.company= '全集团'
     </select>
 
     <resultMap id="Comment" type="com.anteater.fengfang.domains.Comment">

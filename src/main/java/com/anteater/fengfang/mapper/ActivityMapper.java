@@ -28,4 +28,6 @@ public interface ActivityMapper {
     List<Comment> getAllComment();
 
     Boolean updateCommentFlag(String ls,String type);
+
+    Boolean delComments(String[] deleteString);
 }

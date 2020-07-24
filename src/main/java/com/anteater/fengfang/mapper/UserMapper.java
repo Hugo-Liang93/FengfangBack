@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    List<User> getAllUsers();
+    List<User> getAllUsers(String user_id,String role_id);
     User getUserById(String user_id);
     Integer updateUserAccountInfo(User user);
 

@@ -88,4 +88,10 @@ public class ActivityController {
     public Boolean CommentPass(@PathVariable String statusType, @RequestBody  Map<String,String> map ){
         return activityService.updateCommentStatus(map.get("passLs"),statusType);
     }
+
+    @RequestMapping(value="api/Activity/delComment")
+    @ResponseBody
+    public Boolean delComment( @RequestBody  Map<String,String> map ){
+        return activityService.delComments(map.get("passLs"));
+    }
 }

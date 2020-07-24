@@ -74,4 +74,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Boolean updateCommentStatus(String ls, String type) {
         return acitivityMapper.updateCommentFlag(ls,type);
     }
+
+    @Override
+    public Boolean delComments(String ls) {
+        return acitivityMapper.delComments(ls.split(","));
+    }
 }

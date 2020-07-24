@@ -23,4 +23,6 @@ public interface ActivityService {
     List<Comment> getAllComment();
 
     Boolean updateCommentStatus(String ls,String type);
+
+    Boolean delComments(String ls);
 }
