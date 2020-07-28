@@ -21,4 +21,5 @@ public interface UserMapper {
     Boolean addNativePlace(NativePlace nativePlace);
 
     Boolean delUser(String user_id);
+    List<String> getRoles();
 }

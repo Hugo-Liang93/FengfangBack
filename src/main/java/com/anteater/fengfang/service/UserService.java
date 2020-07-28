@@ -13,7 +13,7 @@ public interface UserService {
     Boolean updateUserAccountInfo(User user);
     Boolean updateUserInfo(User user);
     Boolean updateUserSocialInfo(User user);
-
+    List<String> getRoles();
     Boolean addUser(User user);
 
     Boolean delUser(String user_id);

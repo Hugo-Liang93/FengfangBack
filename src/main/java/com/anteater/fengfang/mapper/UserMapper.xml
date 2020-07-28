@@ -133,4 +133,7 @@
         <include refid="userRole"></include>
         where a.user_id = #{user_id}
     </select>
+    <select id="getRoles" resultType="java.lang.String">
+        select from userinfo left join 
+    </select>
 </mapper>

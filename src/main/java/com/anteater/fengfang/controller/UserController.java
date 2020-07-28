@@ -78,5 +78,11 @@ public class UserController {
         return userService.delUser(user_id);
     }
 
+    @RequestMapping(value = "api/filter/get-roles",method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getRoles (){
+        return userService.delUser(user_id);
+    }
+
 
 }

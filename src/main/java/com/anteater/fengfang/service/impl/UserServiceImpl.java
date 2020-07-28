@@ -50,6 +50,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> getRoles() {
+        return null;
+    }
+
+    @Override
     public Boolean addUser(User user) {
         user.getNativePlace().setUser_id(user.getUser_id());
         return userMapper.addUser(user) && userMapper.addNativePlace(user.getNativePlace());
