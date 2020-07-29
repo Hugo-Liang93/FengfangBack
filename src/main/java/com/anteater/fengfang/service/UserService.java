@@ -14,6 +14,8 @@ public interface UserService {
     Boolean updateUserInfo(User user);
     Boolean updateUserSocialInfo(User user);
     List<String> getRoles();
+    List<String> getCompanys();
+    List<String> getDepts();
     Boolean addUser(User user);
 
     Boolean delUser(String user_id);

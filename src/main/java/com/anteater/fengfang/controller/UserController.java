@@ -81,8 +81,21 @@ public class UserController {
     @RequestMapping(value = "api/filter/get-roles",method = RequestMethod.GET)
     @ResponseBody
     public List<String> getRoles (){
-        return userService.delUser(user_id);
+        return userService.getRoles();
     }
+
+    @RequestMapping(value = "api/filter/get-companys",method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getCompanys (){
+        return userService.getCompanys();
+    }
+
+    @RequestMapping(value = "api/filter/get-depts",method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getDepts (){
+        return userService.getDepts();
+    }
+
 
 
 }

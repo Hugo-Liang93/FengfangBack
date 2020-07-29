@@ -134,6 +134,12 @@
         where a.user_id = #{user_id}
     </select>
     <select id="getRoles" resultType="java.lang.String">
-        select from userinfo left join 
+        select distinct b.role_name from userinfo a join user_permissions b on a.role_id = b.role_id
+    </select>
+    <select id="getCompanys" resultType="java.lang.String">
+        select distinct a.user_company from userinfo a
+    </select>
+    <select id="getDepts" resultType="java.lang.String">
+        select distinct a.user_dept from userinfo a
     </select>
 </mapper>

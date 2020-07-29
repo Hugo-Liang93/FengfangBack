@@ -22,4 +22,6 @@ public interface UserMapper {
 
     Boolean delUser(String user_id);
     List<String> getRoles();
+    List<String> getCompanys();
+    List<String> getDepts();
 }

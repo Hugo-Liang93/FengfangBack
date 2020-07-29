@@ -19,6 +19,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(request.getHeader("Authorization") == null){
             logger.info("not login");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Not Login");
             return false;
         }else {
             String accessToken = request.getHeader("Authorization").split(" ")[1];

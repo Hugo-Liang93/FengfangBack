@@ -51,7 +51,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> getRoles() {
-        return null;
+        return userMapper.getRoles();
+    }
+
+    @Override
+    public List<String> getCompanys() {
+        return userMapper.getCompanys();
+    }
+
+    @Override
+    public List<String> getDepts() {
+        return userMapper.getDepts();
     }
 
     @Override
