@@ -7,6 +7,8 @@
     <resultMap id="clockInMap" type="com.anteater.fengfang.domains.Clockin">
         <id property="id" column="id"></id>
         <result property="user_id" column="user_id"></result>
+        <result property="user_name" column="user_name"></result>
+        <result property="user_company" column="user_company"></result>
         <result property="clockin_time" column="clockin_time"></result>
         <result property="clockin_path" column="clockin_path"></result>
         <result property="clockin_lng" column="clockin_lng"></result>
@@ -22,9 +24,12 @@
         select * from user_clockin where user_id = #{user_id} and to_days(clockin_time) = to_days(now())
     </select>
 
-    <select id="getThisMonthClockInListByUid" resultType="com.anteater.fengfang.domains.Clockin">
-        select * from user_clockin where  DATE_FORMAT(clockin_time, '%Y%m' ) = DATE_FORMAT( NOW() , '%Y%m' )
-        and user_id = #{user_id}
+    <select id="getThisMonthClockInListByUser" parameterType="com.anteater.fengfang.domains.User" resultMap="clockInMap">
+        select a.*,b.user_name,b.user_company from user_clockin a left join userinfo b on a.user_id = b.user_id where  DATE_FORMAT(clockin_time, '%Y%m' ) = DATE_FORMAT( NOW() , '%Y%m' )
+        and
+        case when #{permission.role_id} = '1' then true
+        when #{permission.role_id} = '2' then b.user_company = #{user_company}
+        else a.user_id = #{user_id} end
     </select>
 
 

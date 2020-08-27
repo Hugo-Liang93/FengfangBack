@@ -2,8 +2,10 @@ package com.anteater.fengfang.service.impl;
 
 import com.anteater.fengfang.controller.UserController;
 import com.anteater.fengfang.domains.Clockin;
+import com.anteater.fengfang.domains.User;
 import com.anteater.fengfang.domains.response.ResBody;
 import com.anteater.fengfang.mapper.ClockInMapper;
+import com.anteater.fengfang.mapper.UserMapper;
 import com.anteater.fengfang.service.ClockInService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import java.util.List;
 @Service
 public class ClockInServiceImpl implements ClockInService {
     private static Logger logger= Logger.getLogger(ClockInServiceImpl.class);
-
     final static String Fail_MSG = "非打卡时间";
     @Autowired
     ClockInMapper clockInMapper;
+    @Autowired
+    UserMapper userMapper;
+
     @Override
     public ResBody clockIn(Clockin clockin) {
         ResBody resBody = new ResBody();
@@ -44,7 +48,8 @@ public class ClockInServiceImpl implements ClockInService {
 
     @Override
     public List<Clockin> getThisMonthClockInListByUid(String user_id) {
-        return clockInMapper.getThisMonthClockInListByUid(user_id);
+        User user = userMapper.getUserById(user_id);
+        return clockInMapper.getThisMonthClockInListByUser(user);
     }
 
 

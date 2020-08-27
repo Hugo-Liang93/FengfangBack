@@ -79,4 +79,9 @@ public class ActivityServiceImpl implements ActivityService {
     public Boolean delComments(String ls) {
         return acitivityMapper.delComments(ls.split(","));
     }
+
+    @Override
+    public Boolean toTop(String activityId) {
+        return acitivityMapper.toTop(activityId);
+    }
 }

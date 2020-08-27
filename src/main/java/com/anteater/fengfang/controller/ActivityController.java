@@ -28,14 +28,12 @@ public class ActivityController {
     @RequestMapping(value="/api/Activity/updateInfo")
     @ResponseBody
     public Boolean updateActivity(@RequestBody Activity activity){
-        logger.info(activity);
         return activityService.updateActivity(activity);
     }
 
     @RequestMapping(value="/api/Activity/deleteInfo")
     @ResponseBody
     public Boolean deleteActivity(@RequestBody String  activityId){
-        logger.info(activityId);
         return activityService.deleteActivity(activityId);
     }
 
@@ -93,5 +91,11 @@ public class ActivityController {
     @ResponseBody
     public Boolean delComment( @RequestBody  Map<String,String> map ){
         return activityService.delComments(map.get("passLs"));
+    }
+
+    @RequestMapping(value="api/Activity/toTop")
+    @ResponseBody
+    public Boolean toTop(@RequestBody String  activityId){
+        return activityService.toTop(activityId);
     }
 }

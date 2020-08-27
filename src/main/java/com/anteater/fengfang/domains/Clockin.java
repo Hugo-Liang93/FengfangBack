@@ -7,6 +7,8 @@ import lombok.Setter;
 public class Clockin {
     private Integer id;
     private String user_id;
+    private String user_name;
+    private String user_company;
     private String clockin_path;
     private String clockin_time;
     private String clockin_lng;

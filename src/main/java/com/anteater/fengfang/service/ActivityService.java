@@ -25,4 +25,6 @@ public interface ActivityService {
     Boolean updateCommentStatus(String ls,String type);
 
     Boolean delComments(String ls);
+
+    Boolean toTop(String activityId);
 }

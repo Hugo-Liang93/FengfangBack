@@ -30,4 +30,6 @@ public interface ActivityMapper {
     Boolean updateCommentFlag(String ls,String type);
 
     Boolean delComments(String[] deleteString);
+
+    Boolean toTop(String activityId);
 }

@@ -24,7 +24,7 @@
         where
         (user_id = #{user_id} and label = "personal")
         or (
-        user_company in (select user_company from userinfo where user_id = #{user_id})
+        user_company in (select user_company from userinfo where user_id = #{user_id}) and label = "company"
         )
         or label = "all"
     </select>
